@@ -13,7 +13,9 @@ module KnapsackPro
                   :branch => args.fetch(:branch),
                   :node_total => args.fetch(:node_total),
                   :node_index => args.fetch(:node_index),
-                  :test_files => args.fetch(:test_files)
+                  :test_files => args.fetch(:test_files),
+                  :example_count => args.fetch(:example_count),
+                  :failure_count => args.fetch(:failure_count)
                 }
               )
             end

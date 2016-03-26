@@ -4,6 +4,7 @@ module KnapsackPro
 
     attr_reader :global_time, :test_files_with_time
     attr_writer :current_test_path
+    attr_accessor :example_count, :failure_count
 
     def initialize
       set_defaults

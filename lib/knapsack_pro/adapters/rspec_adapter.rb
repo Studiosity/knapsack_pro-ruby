@@ -32,6 +32,8 @@ module KnapsackPro
 
           config.after(:suite) do
             KnapsackPro.logger.info(KnapsackPro::Presenter.global_time)
+            KnapsackPro.tracker.example_count = config.reporter.examples.count
+            KnapsackPro.tracker.failure_count = config.reporter.failed_examples.count
           end
         end
       end
