@@ -41,6 +41,7 @@ module KnapsackPro
           config.after(:suite) do
             KnapsackPro.tracker.example_count = config.reporter.examples.count
             KnapsackPro.tracker.failure_count = config.reporter.failed_examples.count
+            KnapsackPro.tracker.pending_count = config.reporter.pending_examples.count
             KnapsackPro::Report.save
           end
         end

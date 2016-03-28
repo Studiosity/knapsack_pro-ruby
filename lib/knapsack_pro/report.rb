@@ -9,7 +9,8 @@ module KnapsackPro
         node_index: KnapsackPro::Config::Env.ci_node_index,
         test_files: KnapsackPro.tracker.to_a,
         example_count: KnapsackPro.tracker.example_count.to_i,
-        failure_count: KnapsackPro.tracker.failure_count.to_i
+        failure_count: KnapsackPro.tracker.failure_count.to_i,
+        pending_count: KnapsackPro.tracker.pending_count.to_i
       )
       connection = KnapsackPro::Client::Connection.new(action)
       response = connection.call
