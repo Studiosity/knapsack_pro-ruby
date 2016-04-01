@@ -10,7 +10,8 @@ module KnapsackPro
         test_files: KnapsackPro.tracker.to_a,
         example_count: KnapsackPro.tracker.example_count.to_i,
         failure_count: KnapsackPro.tracker.failure_count.to_i,
-        pending_count: KnapsackPro.tracker.pending_count.to_i
+        pending_count: KnapsackPro.tracker.pending_count.to_i,
+        build_url: KnapsackPro::Config::Env.build_url
       )
       connection = KnapsackPro::Client::Connection.new(action)
       response = connection.call

@@ -16,7 +16,8 @@ module KnapsackPro
                   :test_files => args.fetch(:test_files),
                   :example_count => args.fetch(:example_count),
                   :failure_count => args.fetch(:failure_count),
-                  :pending_count => args.fetch(:pending_count)
+                  :pending_count => args.fetch(:pending_count),
+                  :build_url => args.fetch(:build_url)
                 }
               )
             end

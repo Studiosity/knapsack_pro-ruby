@@ -10,6 +10,10 @@ module KnapsackPro
         ci_node_total: env.ci_node_total,
         ci_node_index: env.ci_node_index,
         repository_adapter: repository_adapter,
+        commit_author: env.commit_author,
+        commit_author_email: env.commit_author_email,
+        pull_number: env.pull_number,
+        pull_link: env.pull_link
       )
     end
 

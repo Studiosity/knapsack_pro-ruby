@@ -5,6 +5,10 @@ module KnapsackPro
       @ci_node_total = args.fetch(:ci_node_total)
       @ci_node_index = args.fetch(:ci_node_index)
       @repository_adapter = args.fetch(:repository_adapter)
+      @commit_author = args.fetch(:commit_author)
+      @commit_author_email = args.fetch(:commit_author_email)
+      @pull_number = args.fetch(:pull_number)
+      @pull_link = args.fetch(:pull_link)
     end
 
     def test_file_paths
@@ -14,6 +18,10 @@ module KnapsackPro
         node_total: ci_node_total,
         node_index: ci_node_index,
         test_files: test_files,
+        commit_author: commit_author,
+        commit_author_email: commit_author_email,
+        pull_number: pull_number,
+        pull_link: pull_link
       )
       connection = KnapsackPro::Client::Connection.new(action)
       response = connection.call
@@ -32,6 +40,10 @@ module KnapsackPro
     attr_reader :test_files,
       :ci_node_total,
       :ci_node_index,
-      :repository_adapter
+      :repository_adapter,
+      :commit_author,
+      :commit_author_email,
+      :pull_number,
+      :pull_link
   end
 end

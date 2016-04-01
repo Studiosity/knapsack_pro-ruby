@@ -100,6 +100,26 @@ module KnapsackPro
           value
         end
 
+        def build_url
+          ENV['KNAPSACK_PRO_BUILD_URL']
+        end
+
+        def commit_author
+          ENV['KNAPSACK_PRO_COMMIT_AUTHOR']
+        end
+
+        def commit_author_email
+          ENV['KNAPSACK_PRO_COMMIT_AUTHOR_EMAIL']
+        end
+
+        def pull_number
+          ENV['KNAPSACK_PRO_PULL_NUMBER']
+        end
+
+        def pull_link
+          ENV['KNAPSACK_PRO_PULL_LINK']
+        end
+
         private
 
         def required_env(env_name)
