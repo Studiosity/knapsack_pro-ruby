@@ -28,6 +28,8 @@ module KnapsackPro
       if connection.success?
         raise ArgumentError.new(response) if connection.errors?
         KnapsackPro::TestFilePresenter.paths(response['test_files'])
+      elsif KnapsackPro::Config::Env.fail_on_network_failure?
+        raise 'Connection to backend server failed..'
       else
         test_flat_distributor = KnapsackPro::TestFlatDistributor.new(test_files, ci_node_total)
         test_files_for_node_index = test_flat_distributor.test_files_for_node(ci_node_index)

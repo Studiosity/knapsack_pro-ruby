@@ -120,6 +120,10 @@ module KnapsackPro
           ENV['KNAPSACK_PRO_PULL_LINK']
         end
 
+        def fail_on_network_failure?
+          ENV['KNAPSACK_PRO_NETWORK_FAIL'] == 'true'
+        end
+
         private
 
         def required_env(env_name)
