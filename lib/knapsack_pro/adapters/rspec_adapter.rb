@@ -28,6 +28,7 @@ module KnapsackPro
 
           config.after(:each) do
             KnapsackPro.tracker.stop_timer
+            KnapsackPro.tracker.save_example_counts config.reporter
           end
 
           config.after(:suite) do
@@ -39,6 +40,7 @@ module KnapsackPro
       def bind_save_report
         ::RSpec.configure do |config|
           config.after(:suite) do
+            KnapsackPro.tracker.save_example_counts config.reporter
             KnapsackPro.tracker.example_count = config.reporter.examples.count
             KnapsackPro.tracker.failure_count = config.reporter.failed_examples.count
             KnapsackPro.tracker.pending_count = config.reporter.pending_examples.count
