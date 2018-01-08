@@ -28,7 +28,7 @@ module KnapsackPro
             private
 
             def coverage
-              path = File.expand_path 'coverage/.resultset.json', Dir.getwd
+              path = File.expand_path 'coverage/codeclimate-formatted.json', Dir.getwd
               file = File.read(path)
               JSON.parse(file)
             rescue
