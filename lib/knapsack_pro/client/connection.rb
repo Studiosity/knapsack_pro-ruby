@@ -1,7 +1,8 @@
 module KnapsackPro
   module Client
     class Connection
-      TIMEOUT = 30
+      TIMEOUT = 60
+      REQUEST_RETRY_TIMEBOX = 2
 
       def initialize(action)
         @action = action
@@ -66,28 +67,35 @@ module KnapsackPro
       end
 
       def post
+        retries ||= 0
         uri = URI.parse(endpoint_url)
         http = Net::HTTP.new(uri.host, uri.port)
         http.use_ssl = (uri.scheme == 'https')
-        http.open_timeout = TIMEOUT
-        http.read_timeout = TIMEOUT
+        http.open_timeout = http.read_timeout = (ENV['KNAPSACK_PRO_CONNECTION_TIMEOUT'] || TIMEOUT).to_i
 
         http_response = http.post(uri.path, request_body, json_headers)
         @response = parse_response(http_response.body)
 
         request_uuid = http_response.header['X-Request-Id']
 
-        logger.info("API request UUID: #{request_uuid}")
-        logger.info('API response:')
+        logger.debug("API request UUID: #{request_uuid}")
+        logger.debug('API response:')
         if errors?
           logger.error(response)
         else
-          logger.info(response)
+          logger.debug(response)
         end
 
         response
-      rescue Errno::ECONNREFUSED, EOFError, Net::OpenTimeout, Net::ReadTimeout => e
+      rescue Errno::ECONNREFUSED, Errno::ETIMEDOUT, EOFError, SocketError, Net::OpenTimeout, Net::ReadTimeout => e
         logger.warn(e.inspect)
+        retries += 1
+        if retries < 3
+          wait = retries * REQUEST_RETRY_TIMEBOX
+          logger.warn("Wait #{wait}s and retry request to Knapsack Pro API.")
+          sleep wait
+          retry
+        end
       end
     end
   end
