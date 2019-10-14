@@ -1,5 +1,3 @@
-require 'json'
-
 module KnapsackPro
   module Client
     module API
@@ -19,20 +17,9 @@ module KnapsackPro
                   :example_count => args.fetch(:example_count),
                   :failure_count => args.fetch(:failure_count),
                   :pending_count => args.fetch(:pending_count),
-                  :build_url => args.fetch(:build_url),
-                  :coverage => coverage
+                  :build_url => args.fetch(:build_url)
                 }
               )
-            end
-
-            private
-
-            def coverage
-              path = File.expand_path 'coverage/codeclimate-formatted.json', Dir.getwd
-              file = File.read(path)
-              JSON.parse(file)
-            rescue
-              {}
             end
           end
         end
