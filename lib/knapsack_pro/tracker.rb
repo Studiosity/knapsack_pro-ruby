@@ -26,6 +26,10 @@ module KnapsackPro
     end
 
     def save_example_counts(reporter)
+      # If the current test path hasn't been assigned then something has gone terribly wrong.
+      # Just ignore saving the example count..
+      return unless @current_test_path.present?
+
       @test_files_with_time[current_test_path].merge!(current_example_counts reporter) { |_, val1, val2| val1 + val2 }
       update_global_example_counts reporter
     end
